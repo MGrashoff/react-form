@@ -308,7 +308,7 @@ export const RegistrationForm: React.FC = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-xs-6">
+                        <div className="col-xs-12 col-md-6">
                             <Field {...fields.signature} />
                         </div>
                     </div>
