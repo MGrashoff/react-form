@@ -1,14 +1,15 @@
 import * as React from "react";
-import { ContactUsForm } from "./ContactUsForm";
+import {RegistrationForm} from "./form/RegistrationForm/RegistrationForm";
+import './App.css';
 
 class App extends React.Component {
-  public render() {
-    return (
-      <div className="mt-3">
-        <ContactUsForm />
-      </div>
-    );
-  }
+    public render() {
+        return (
+            <div className="wrapper">
+                <RegistrationForm/>
+            </div>
+        );
+    }
 }
 
 export default App;

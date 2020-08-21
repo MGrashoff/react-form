@@ -1,0 +1,14 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.checkbox, .radio {
+    margin-left: 1em;
+}
+
+.signature {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    box-shadow: none;
+}

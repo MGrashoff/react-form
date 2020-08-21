@@ -1,0 +1,23 @@
+h1 {
+    display: inline-block;
+    font-size: 24px;
+    margin-right: 0.3em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+p {
+    display: inline-block;
+}
+
+.seperator {
+    background-color: #777;
+    height: 3px;
+    margin: 2em 0 2em;
+}
+
+.seperator-small {
+    background-color: #CCC;
+    height: 1px;
+    margin: 1em 0 1em;
+}
