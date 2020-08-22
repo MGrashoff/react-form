@@ -1,35 +1,6 @@
 import * as React from "react";
 import {IFieldProps} from "../Field/Field";
 
-export interface IFormContext extends IFormState {
-    /* Function that allows values in the values state to be set */
-    setValues: (values: IValues) => void;
-
-    /* Function that validates a field */
-    validate: (fieldName: string) => void;
-}
-
-/*
- * The context which allows state and functions to be shared with Field.
- * Note that we need to pass createContext a default value which is why undefined is unioned in the type
- */
-export const FormContext = React.createContext<IFormContext | undefined>(
-    undefined
-);
-
-/**
- * Validates whether a field has a value
- * @param {IValues} values - All the field values in the form
- * @param {string} fieldName - The field to validate
- * @returns {string} - The error message
- */
-export const required = (values: IValues, fieldName: string): string =>
-    values[fieldName] === undefined ||
-    values[fieldName] === null ||
-    values[fieldName] === ""
-        ? "This must be populated"
-        : "";
-
 export interface IFields {
     [key: string]: IFieldProps;
 }
@@ -51,7 +22,7 @@ export interface IValues {
 }
 
 export interface IErrors {
-    /* The validation error messages for each field (key is the field name */
+    /* The validation error messages for each field (key is the field name) */
     [key: string]: string;
 }
 
@@ -65,6 +36,34 @@ export interface IFormState {
     /* Whether the form has been successfully submitted */
     submitSuccess?: boolean;
 }
+
+export interface IFormContext extends IFormState {
+    /* Function that allows values in the values state to be set */
+    setValues: (values: IValues) => void;
+
+    /* Function that validates a field */
+    validate: (fieldName: string) => void;
+}
+
+/*
+ * The context which allows state and functions to be shared with Field.
+ */
+export const FormContext = React.createContext<IFormContext | undefined>(
+    undefined
+);
+
+/**
+ * Validates whether a field has a value
+ * @param {IValues} values - All the field values in the form
+ * @param {string} fieldName - The field to validate
+ * @returns {string} - The error message
+ */
+export const required = (values: IValues, fieldName: string): string =>
+    values[fieldName] === undefined ||
+    values[fieldName] === null ||
+    values[fieldName] === ""
+        ? "This must be populated"
+        : "";
 
 export class Form extends React.Component<IFormProps, IFormState> {
     constructor(props: IFormProps) {
@@ -127,18 +126,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
     }
 
     /**
-     * Handles form submission
-     * @param {React.FormEvent<HTMLFormElement>} e - The form event
-     */
-    private handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-        e.preventDefault();
-        if (this.validateForm()) {
-            const submitSuccess: boolean = await this.submitForm();
-            this.setState({submitSuccess});
-        }
-    };
-
-    /**
      * Executes the validation rules for all the fields on the form and sets the error state
      * @returns {boolean} - Returns true if the form is valid
      */
@@ -163,6 +150,18 @@ export class Form extends React.Component<IFormProps, IFormState> {
             return false;
         }
     }
+
+    /**
+     * Handles form submission
+     * @param {React.FormEvent<HTMLFormElement>} e - The form event
+     */
+    private handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
+        if (this.validateForm()) {
+            const submitSuccess: boolean = await this.submitForm();
+            this.setState({submitSuccess});
+        }
+    };
 
     public render() {
         const {submitSuccess, errors} = this.state;

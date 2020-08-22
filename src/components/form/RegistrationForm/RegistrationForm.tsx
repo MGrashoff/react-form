@@ -16,6 +16,11 @@ export const RegistrationForm: React.FC = () => {
             label: "Apartment post code",
             validation: {rule: required}
         },
+        address: {
+            id: "address",
+            label: "Street (or place etc.), house number, add-on (e.g. name of main tenant), floor, apartment number",
+            validation: {rule: required}
+        },
         landlordDetails: {
             id: "landlordDetails",
             label: "Name and address of the landlord",
@@ -59,19 +64,28 @@ export const RegistrationForm: React.FC = () => {
         },
         household: {
             id: "household",
-            label: "Please fill in the head of the household's details followed by each family member living in the same domicile!",
+            label: "Please fill in the head of the household's details followed by each family member living in the same domicile",
             editor: "multilinetextbox",
             validation: {rule: required}
         },
         previous: {
             id: "previous",
             label: "Previous accomodation (post code, Municipality / street / house number and add-on)",
-            validation: {rule: required}
         },
         signature: {
             id: "signature",
             editor: "signature",
             label: "Date and signature of the person subject to registration",
+            validation: {rule: required}
+        },
+        cardAuthority: {
+            id: "cardAuthority",
+            label: "Issuing authority, date of issue, expiry date and serial number",
+            validation: {rule: required}
+        },
+        passAuthority: {
+            id: "passAuthority",
+            label: "Issuing authority, date of issue, expiry date and serial number",
             validation: {rule: required}
         },
 
@@ -138,8 +152,6 @@ export const RegistrationForm: React.FC = () => {
             label: "widowed civil partner",
             value: "widowedPartner"
         },
-
-
         lutheran: {
             id: "lutheran",
             name: "religion",
@@ -175,6 +187,16 @@ export const RegistrationForm: React.FC = () => {
             label: "Roman Catholic",
             value: "catholic"
         },
+        idCard: {
+            id: "idCard",
+            editor: "checkbox",
+            label: "ID Card",
+        },
+        passport: {
+            id: "passport",
+            editor: "checkbox",
+            label: "Passport",
+        },
     };
     return (
         <Form
@@ -196,6 +218,11 @@ export const RegistrationForm: React.FC = () => {
                         </div>
                         <div className="col-xs-6 col-md-3">
                             <Field {...fields.apartment} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <Field {...fields.address} />
                         </div>
                     </div>
                     <div className="row">
@@ -229,12 +256,15 @@ export const RegistrationForm: React.FC = () => {
                             <Field {...fields.placeOfBirth} />
                         </div>
                     </div>
-
-                    {/* Relationship Status */}
                     <div className="row">
                         <div className="col-xs-12">
                             <div className="seperator"/>
                         </div>
+                    </div>
+
+                    {/* Relationship Status */}
+                    <div className="row col-xs-12">
+                        <h2>Relationship Status:</h2>
                     </div>
                     <div className="row">
                         <div className="col-xs-6 col-md-3"><Field {...fields.single} /></div>
@@ -265,6 +295,9 @@ export const RegistrationForm: React.FC = () => {
                     </div>
 
                     {/* Religion */}
+                    <div className="row col-xs-12">
+                        <h2>Religious Affiliation:</h2>
+                    </div>
                     <div className="row">
                         <div className="col-xs-6 col-md-3"><Field {...fields.lutheran} /></div>
                         <div className="col-xs-6 col-md-3"><Field {...fields.jewish} /></div>
@@ -290,6 +323,27 @@ export const RegistrationForm: React.FC = () => {
                     <div className="row">
                         <div className="col-xs-12">
                             <Field {...fields.nationalities} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-3 col-md-1">
+                            <Field {...fields.idCard} />
+                        </div>
+                        <div className="col-xs-9 col-md-11">
+                            <Field {...fields.cardAuthority} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-3 col-md-1">
+                            <Field {...fields.passport} />
+                        </div>
+                        <div className="col-xs-9 col-md-11">
+                            <Field {...fields.passAuthority} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <div className="seperator"/>
                         </div>
                     </div>
                     <div className="row">

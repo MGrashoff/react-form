@@ -6,6 +6,13 @@ h1 {
     font-weight: bold;
 }
 
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+
 p {
     display: inline-block;
 }
