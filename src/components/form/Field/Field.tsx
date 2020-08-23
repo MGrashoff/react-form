@@ -4,7 +4,7 @@ import './Field.css';
 import {IErrors, IValues, IFormContext, FormContext} from "../Form/Form";
 
 /* The available editors for the field */
-type Editor = "textbox" | "multilinetextbox" | "dropdown" | "checkbox" | "signature" | "radio";
+type Editor = "textbox" | "multilinetextbox" | "checkbox" | "signature" | "radio";
 
 export interface IValidation {
     rule: (values: IValues, fieldName: string, args: any) => string;
@@ -81,27 +81,6 @@ export const Field: React.FC<IFieldProps> = ({id, name, label, editor, options, 
                             className="form-control"
                             style={getEditorStyle(context.errors)}
                         />
-                    )}
-
-                    {editor!.toLowerCase() === "dropdown" && (
-                        <select
-                            id={id}
-                            name={id}
-                            value={value}
-                            onChange={(e: React.FormEvent<HTMLSelectElement>) =>
-                                context.setValues({[id]: e.currentTarget.value})
-                            }
-                            onBlur={() => context.validate(id)}
-                            className="form-control"
-                            style={getEditorStyle(context.errors)}
-                        >
-                            {options &&
-                            options.map(option => (
-                                <option key={option} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
                     )}
 
                     {editor!.toLowerCase() === "checkbox" && (

@@ -5,6 +5,8 @@ import {Field} from "../Field/Field";
 import './RegistrationForm.css';
 
 export const RegistrationForm: React.FC = () => {
+
+    /* Define all fields of the form */
     const fields: IFields = {
         dateOfMoving: {
             id: "dateOfMoving",
@@ -50,13 +52,6 @@ export const RegistrationForm: React.FC = () => {
             label: "Place of birth (city and country)",
             validation: {rule: required}
         },
-        // reason: {
-        //     id: "reason",
-        //     label: "Reason",
-        //     editor: "dropdown",
-        //     options: ["", "Marketing", "Support", "Feedback", "Jobs"],
-        //     validation: {rule: required}
-        // },
         nationalities: {
             id: "nationalities",
             label: "Current Nationalities",
@@ -198,6 +193,10 @@ export const RegistrationForm: React.FC = () => {
             label: "Passport",
         },
     };
+
+    /**
+     * Return the form with all requested fields and send the results to a dummy API
+     * */
     return (
         <Form
             action="http://localhost:4321/api/dummy"
