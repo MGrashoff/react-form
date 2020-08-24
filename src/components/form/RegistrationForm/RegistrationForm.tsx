@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Form, IFields, required} from "../Form/Form";
+import {Form, IFields, isValidPostcode, required} from "../Form/Form";
 import {Field} from "../Field/Field";
 
 import './RegistrationForm.css';
@@ -16,7 +16,7 @@ export const RegistrationForm: React.FC = () => {
         apartment: {
             id: "apartment",
             label: "Apartment post code",
-            validation: {rule: required}
+            validation: {rule: isValidPostcode}
         },
         address: {
             id: "address",
@@ -70,8 +70,7 @@ export const RegistrationForm: React.FC = () => {
         signature: {
             id: "signature",
             editor: "signature",
-            label: "Date and signature of the person subject to registration",
-            validation: {rule: required}
+            label: "Date, city and signature of the person subject to registration",
         },
         cardAuthority: {
             id: "cardAuthority",
@@ -111,6 +110,7 @@ export const RegistrationForm: React.FC = () => {
             name: "relationship",
             editor: "radio",
             label: "civil partnership",
+            value: "civil"
         },
         anCivil: {
             id: "anCivil",
@@ -186,17 +186,17 @@ export const RegistrationForm: React.FC = () => {
             id: "idCard",
             editor: "checkbox",
             label: "ID Card",
+            value: "idCard"
         },
         passport: {
             id: "passport",
             editor: "checkbox",
             label: "Passport",
+            value: "passport"
         },
     };
 
-    /**
-     * Return the form with all requested fields and send the results to a dummy API
-     * */
+    /* Return the form with all requested fields and send the results to a dummy API */
     return (
         <Form
             action="http://localhost:4321/api/dummy"
@@ -212,10 +212,10 @@ export const RegistrationForm: React.FC = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-xs-6 col-md-3">
+                        <div className="col-xs-5 col-md-3">
                             <Field {...fields.dateOfMoving} />
                         </div>
-                        <div className="col-xs-6 col-md-3">
+                        <div className="col-xs-7 col-md-3">
                             <Field {...fields.apartment} />
                         </div>
                     </div>

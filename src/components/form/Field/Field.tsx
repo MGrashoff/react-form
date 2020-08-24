@@ -24,9 +24,6 @@ export interface IFieldProps {
     /* The editor for the field */
     editor?: Editor;
 
-    /* The drop down items for the field */
-    options?: string[];
-
     /* The field value */
     value?: any;
 
@@ -34,7 +31,12 @@ export interface IFieldProps {
     validation?: IValidation;
 }
 
-export const Field: React.FC<IFieldProps> = ({id, name, label, editor, options, value}) => {
+/**
+ * Builds the fields according to the props passed down
+ * @param {IFieldProps} props - All the props the field needs
+ * @returns {FC} - A functional component which decides its input field based on the editor type
+ */
+export const Field: React.FC<IFieldProps> = ({id, name, label, editor, value}) => {
     /**
      * Gets the validation error for the field
      * @param {IErrors} errors - All the errors from the form
@@ -100,8 +102,9 @@ export const Field: React.FC<IFieldProps> = ({id, name, label, editor, options, 
                         <input
                             id={id}
                             type="radio"
+                            value={value}
                             onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                                context.setValues({[id]: e.currentTarget.value})
+                                context.setValues({[name !== undefined ? name : id]: e.currentTarget.value})
                             }
                             name={name}
                             className="form-check-input radio"

@@ -65,6 +65,22 @@ export const required = (values: IValues, fieldName: string): string =>
         ? "This must be populated"
         : "";
 
+/**
+ * Validates a post code
+ * @param {IValues} values - All the field values in the form
+ * @param {string} fieldName - The field to validate
+ * @returns {string} - The error message
+ */
+export const isValidPostcode = (values: IValues, fieldName: string): string => {
+    const regex = new RegExp(/^(?!01000|99999)(0[1-9]\d{3}|[1-9]\d{4})$/);
+    return values[fieldName] === undefined ||
+    values[fieldName] === null ||
+    values[fieldName] === "" ||
+    !regex.test(values[fieldName])
+        ? "This must be a valid postcode"
+        : "";
+};
+
 export class Form extends React.Component<IFormProps, IFormState> {
     constructor(props: IFormProps) {
         super(props);
@@ -144,7 +160,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
      */
     private async submitForm(): Promise<boolean> {
         try {
-            console.log(JSON.stringify(this.state.values));
+            console.log(this.state.values);
             return true;
         } catch (ex) {
             return false;
